@@ -6,7 +6,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <caption>List of Category</caption>
+                    <caption>List of Book Category</caption>
                 </div>
                 <div class="card-body">
                     <div class="row">
