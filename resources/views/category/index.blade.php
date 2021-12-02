@@ -6,7 +6,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <caption>List of Book Category</caption>
+                    <caption>List Category</caption>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -39,7 +39,7 @@
                                 <td>{{$category->created_at_with_format}}</td>
                                 <td>{{$category->updated_at_with_format}}</td>
                                 <td class="text-center">
-                                    <a href="{{route('category.edit', ['id'=>$category->id])}}" class="btn btn-primary"><b>Edit</b></a>
+                                    <a href="{{route('category.edit', ['id'=>$category->id])}}" class="btn btn-warning"><b>Edit</b></a>
                                     @component('components.delete')
                                         @slot('url')
                                             {{ route('category.delete', ['id'=>$category->id]) }}
@@ -52,7 +52,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5">Data empty</td>
+                                <td colspan="5">Data Tidak Tersedia</td>
                             </tr>
                             @endforelse
                         </tbody>
