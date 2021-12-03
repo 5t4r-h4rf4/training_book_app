@@ -37,6 +37,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'judul' => 'required|min:4',
             'tahun' => 'required|numeric',
@@ -51,6 +52,8 @@ class BookController extends Controller
             $book->cover = $imagePath;
         }
         $book->save();
+
+        $book->categories()->attach($request->category);
         return redirect()->route('book.index')->with('status', 'Buku berhasil ditambahkan');
     }
 
@@ -73,7 +76,10 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $books = Book::findOrFail($book);
+        return view('book.edit', [
+            'books' => $books
+        ]);
     }
 
     /**

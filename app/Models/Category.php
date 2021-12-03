@@ -35,4 +35,9 @@ class Category extends Model
     {
         return Carbon::parse($this->updated_at)->format('d M Y');
     }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'book_category', 'category_id', 'book_id')->withTimestamps();
+    }
 }

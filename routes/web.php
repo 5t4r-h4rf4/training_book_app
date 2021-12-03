@@ -35,6 +35,8 @@ Route::prefix('category')->group(function () {
     Route::put('/{id}}', [CategoryController::class, 'update'])->name('category.update');
     // UNTUK DELETE DATA
     Route::delete('/{id}}', [CategoryController::class, 'destroy'])->name('category.delete');
+    // SELECT PADA CREATE BOOK
+    Route::get('/all', [CategoryController::class, 'getAllCategory'])->name('category.all');
 });
 
 Route::resource('book', BookController::class);
