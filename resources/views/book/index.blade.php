@@ -52,7 +52,7 @@
                                         <li>{{$category->name}}</li>
 
                                         @empty
-                                        <li>Tdak memiliki category</li>
+                                        <li>Tidak memiliki category</li>
                                         @endforelse
                                     </ul>
                                 </td>
