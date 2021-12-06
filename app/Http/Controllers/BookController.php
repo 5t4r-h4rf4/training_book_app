@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -26,7 +28,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        return view('book.create', [
+            'category' => Category::all()
+        ]);
     }
 
     /**
@@ -76,9 +80,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        $books = Book::findOrFail($book);
         return view('book.edit', [
-            'books' => $books
+            'book' => $book
         ]);
     }
 
@@ -91,22 +94,34 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+
         $request->validate([
             'judul' => 'required|min:4',
             'tahun' => 'required|numeric',
-            'cover' => 'mimes:png,jpg|max:10000'
+            'cover' => 'mimes:png,jpg|max:10000',
         ]);
 
-        $book = new Book();
         $book->judul = $request->judul;
         $book->tahun = $request->tahun;
-        if ($request->file('cover')) {
-            $imagePath = $request->file('cover')->store('book_cover', 'public');
+        $file = $request->file('cover');
+        if ($file) {
+            if ($book->cover) {
+                Storage::delete('public/' . $book->cover);
+            }
+            $imagePath = $file->store('book_cover', 'public');
             $book->cover = $imagePath;
         }
         $book->save();
-        return redirect()->route('book.index')->with('status', 'Buku berhasil ditambahkan');
+
+        // $book->categories()->detach();
+        // $book->categories()->attach($request->category);
+
+        $book->categories()->sync($request->category);
+
+        return redirect()->route('book.index')->with('status', 'Buku berhasil diperbarui');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -116,6 +131,11 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->categories()->detach();
+        if ($book->cover) {
+            Storage::delete('public/' . $book->cover);
+        }
+        $book->delete();
+        return redirect()->route('book.index')->with('status', 'Buku berhasil dihapus');
     }
 }

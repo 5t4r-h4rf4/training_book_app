@@ -22,19 +22,19 @@
                         <div class="form-group row">
                             <label for="" class="col-sm-2 col-form-label">Judul</label>
                             <div class="col-sm-6">
-                                <input id="judul" name="judul" type="text" class="form-control" placeholder="Insert Name Here !!" >
+                                <input id="judul" name="judul" type="text" class="form-control" placeholder="Insert Name Here !!" value="{{old('judul')}}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-2 col-form-label mt-2">Tahun</label>
                             <div class="col-sm-6 mt-2">
-                                <input id="tahun" name="tahun" type="text" class="form-control" placeholder="Insert Tahun Here !!" >
+                                <input id="tahun" name="tahun" type="text" class="form-control" placeholder="Insert Tahun Here !!" value="{{old('tahun')}}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-2 col-form-label mt-2">Cover</label>
                             <div class="col-sm-6 mt-2">
-                                <input id="cover" name="cover" type="file" class="form-control">
+                                <input id="cover" name="cover" type="file" class="form-control" value="{{old('cover')}}">
                             </div>
                         </div>
                         <div class="form-group row">

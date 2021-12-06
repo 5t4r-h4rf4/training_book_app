@@ -21,22 +21,24 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('category')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+    Route::prefix('category')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('category.index');
 
-    Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
-    //UNTUK INSERT DATA MENGGUNAKAN POST
-    Route::post('/post', [CategoryController::class, 'store'])->name('category.store');
-    //UNTUK MENANGKAP DATA ID
-    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    //UNTUK UPDATE MENGGUNAKAN PUT
-    Route::put('/{id}}', [CategoryController::class, 'update'])->name('category.update');
-    // UNTUK DELETE DATA
-    Route::delete('/{id}}', [CategoryController::class, 'destroy'])->name('category.delete');
-    // SELECT PADA CREATE BOOK
-    Route::get('/all', [CategoryController::class, 'getAllCategory'])->name('category.all');
+        Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+        //UNTUK INSERT DATA MENGGUNAKAN POST
+        Route::post('/post', [CategoryController::class, 'store'])->name('category.store');
+        //UNTUK MENANGKAP DATA ID
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        //UNTUK UPDATE MENGGUNAKAN PUT
+        Route::put('/{id}}', [CategoryController::class, 'update'])->name('category.update');
+        // UNTUK DELETE DATA
+        Route::delete('/{id}}', [CategoryController::class, 'destroy'])->name('category.delete');
+        // SELECT PADA CREATE BOOK
+        Route::get('/all', [CategoryController::class, 'getAllCategory'])->name('category.all');
+    });
+
+    Route::resource('book', BookController::class);
 });
-
-Route::resource('book', BookController::class);
