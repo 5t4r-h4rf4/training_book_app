@@ -43,6 +43,8 @@
                                             <a href="{{ route('category.edit', ['id' => $category->id]) }}"
                                                 class="btn btn-info"><b>Show</b></a>
                                             <a href="{{ route('category.edit', ['id' => $category->id]) }}"
+                                                class="btn btn-info"><b>lihat</b></a>
+                                            <a href="{{ route('category.edit', ['id' => $category->id]) }}"
                                                 class="btn btn-warning"><b>Edit</b></a>
                                             @component('components.delete')
                                                 @slot('url')
