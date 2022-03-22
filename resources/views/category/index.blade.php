@@ -41,8 +41,6 @@
                                         <td>{{ $category->updated_at_with_format }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('category.edit', ['id' => $category->id]) }}"
-                                                class="btn btn-info"><b>Show</b></a>
-                                            <a href="{{ route('category.edit', ['id' => $category->id]) }}"
                                                 class="btn btn-info"><b>lihat</b></a>
                                             <a href="{{ route('category.edit', ['id' => $category->id]) }}"
                                                 class="btn btn-warning"><b>Edit</b></a>
